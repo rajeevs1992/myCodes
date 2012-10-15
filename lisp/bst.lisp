@@ -29,7 +29,6 @@
 		)
 	)
 )
-
 (defun del (key l)
 	(if (car l)
 		(cond 
