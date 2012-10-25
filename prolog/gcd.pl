@@ -9,4 +9,3 @@ gcd(A,B,C):-
 gcd(A,B,C):-
 	A = B,
 	C is A.
-

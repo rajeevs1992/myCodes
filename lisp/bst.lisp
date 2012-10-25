@@ -73,6 +73,7 @@
 		(setf l (insert 124 l))
 		(setf l (insert 126 l))
 		(setf l (insert 601 l))
+		(print l)
 		(setf l (del 500 l))
 		(print l)
 		(setf l (del 124 l))
