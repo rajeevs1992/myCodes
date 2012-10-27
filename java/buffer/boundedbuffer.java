@@ -1,75 +1,78 @@
 class Lock{}
 class BoundedBuffer extends Thread
 {
-	static public int full=0,empty=10;
-	int mode;
+	static public int count=0;
+	int BUFSIZE=10;
+	int mode,id,sl;
 	static Lock L=new Lock();
-	BoundedBuffer(int m)
+	BoundedBuffer(int m,int id,int sl)
 	{
 		mode=m;
+		this.id=id;
+		this.sl=sl;
 	}
-	public void claimEmpty()
+	public void additem()
 	{
 		synchronized(L)
 		{
-		while(empty<=0)
-		{
-			try
+			while(count==BUFSIZE)
 			{
-				L.wait();
-			}catch(InterruptedException e){}
-		}
-			empty--;
+				try
+				{
+					L.wait();
+				}catch(InterruptedException e){}
+			}
+			count++;
+			System.out.println("\tProduced by "+id);
+			if(count==1)
+				L.notifyAll();
 		}
 	}
-	public void claimFull()
+	public void remitem()
 	{
 		synchronized(L)
 		{
-		while(full<=0)
-		{
-			try
+			while(count==0)
 			{
-				L.wait();
-			}catch(InterruptedException e){}
-		}
-			full--;
-		}
-	}
-	public void consume()
-	{
-		synchronized(L)
-		{
-			claimFull();
-			System.out.println("Consumed a full ");
-			empty++;
-			L.notifyAll();
-			try
-			{
-				Thread.sleep(1000);
-			}catch(InterruptedException e){}
+				try
+				{
+					L.wait();
+				}catch(InterruptedException e){}
+			}
+			count--;
+			System.out.println("Consumed by "+id);
+			if(count==BUFSIZE-1)
+				L.notifyAll();
 		}
 	}
 	public void produce()
 	{
-		synchronized(L)
+		while(true)
 		{
-			claimEmpty();
-			System.out.println("Produced a full ");
-			full++;
-			L.notifyAll();
+			additem();
 			try
 			{
-				Thread.sleep(1000);
+				Thread.sleep(sl);
+			}catch(InterruptedException e){}
+		}
+	}
+	public void consume()
+	{
+		while(true)
+		{
+			remitem();
+			try
+			{
+				Thread.sleep(sl);
 			}catch(InterruptedException e){}
 		}
 	}
 	public void run()
 	{
 		if(mode==0)
-			consume();
-		else
 			produce();
+		else
+			consume();
 	}
 }
 
@@ -77,16 +80,13 @@ class Main
 {
 	public static void main(String argv[])
 	{
-		BoundedBuffer[] B=new BoundedBuffer[10];
-		B[0]=new BoundedBuffer(0);
-		B[1]=new BoundedBuffer(0);
-		B[2]=new BoundedBuffer(0);
-		B[3]=new BoundedBuffer(0);
-		B[4]=new BoundedBuffer(0);
-		B[5]=new BoundedBuffer(0);
-		B[6]=new BoundedBuffer(1);
+		BoundedBuffer[] B=new BoundedBuffer[4];
+		B[0]=new BoundedBuffer(0,1,100);
+		B[1]=new BoundedBuffer(1,2,2100);
+		B[2]=new BoundedBuffer(1,3,1050);
+		B[3]=new BoundedBuffer(1,4,500);
 		int i=0;
-		while(i<7)
+		while(i<4)
 			B[i++].start();
 	}
 }
