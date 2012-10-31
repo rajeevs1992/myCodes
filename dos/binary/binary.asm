@@ -45,7 +45,7 @@ start:
 		l3:
 	        read
 			mov ah,00h
-			cmp ax,'x'
+			cmp ax,0dh
 			jz done
 			sal bx,1h
 			cmp ax,31h
