@@ -21,7 +21,7 @@ endm
         assume ds:data
         assume cs:code
 code segment
-start:
+	start:
         mov ax,data
         mov ds,ax
         mov es,ax
