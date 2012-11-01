@@ -7,7 +7,8 @@
 		*Create 2 threads,one searching for "a" in currentNode.left and other "b" in currentNode.right
 		*If found,set corresponding flags "af" (a.k.a "a found") or bf
 		*The current node is LCA of a and b if af=bf=true,if found exit.
-		*If af is true and bf is false,it means that a and b lie on the left subtree,hence repeat with left child of currentNode as root
+		*If af is true and bf is false,it means that a and b lie on the left subtree,
+		 hence repeat with left child of currentNode as root
 		*Else repeat with right child of currentNode as root
 */
 import java.io.*;
