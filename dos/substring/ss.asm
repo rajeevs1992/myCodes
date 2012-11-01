@@ -26,7 +26,6 @@ code segment
         mov ds,ax
         mov es,ax
 
-
 		dispStr get1
 		read str1
 		dispStr get2
@@ -38,7 +37,7 @@ code segment
 
 		l1:
 			inc ax
-			lea si,str1
+			lea si,str1+2
 			add si,ax
 			lea di,str2+2
 
