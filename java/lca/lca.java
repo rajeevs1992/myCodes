@@ -1,4 +1,18 @@
+/*
+	Concurrent LCA computation
+	Algorithm:
+		*Read the tree
+		*Read the 2 nodes whose LCA must be computed a,b and a < b
+		*Travaerse the tree starting from root
+		*Create 2 threads,one searching for "a" in currentNode.left and other "b" in currentNode.right
+		*If found,set corresponding flags "af" (a.k.a "a found") or bf
+		*The current node is LCA of a and b if af=bf=true,if found exit.
+		*If af is true and bf is false,it means that a and b lie on the left subtree,
+		 hence repeat with left child of currentNode as root
+		*Else repeat with right child of currentNode as root
+*/
 import java.io.*;
+
 class Node
 {
 	int data;
@@ -17,104 +31,108 @@ class Main
 	public static void main(String args[])
 	{
 		Read r=new Read();
-		Tree t=new Tree();
-		int ch=1,a,b;
-		while(ch==1)
+		Tree t=new Tree(null);
+		int a,b,item;
+		while(true)
 		{
-			t.insert();
-			System.out.print("Enter more?y/n");
-			ch=r.readInt();
+			System.out.print("\nEnter the item ,0 to exit ");
+			item=r.readInt();
+			if(item==0)
+				break;
+			t.insert(item);
 		}
-		System.out.println("Enter the first node ");
+		System.out.print("Enter the first node ");
 		a=r.readInt();
-		System.out.println("Enter the first second ");			
+		System.out.print("Enter the second node ");
 		b=r.readInt();
-		Lca l=new Lca(a,b,t);
-		l.start();
+		Lca l;
+		if(a<b)
+			l=new Lca(t,a,b);
+		else
+			l=new Lca(t,b,a);
+		l.parse();
 	}
 }
 class Lca extends Thread
 {
-	int a,b,key,bit;
-	boolean af=false,bf=false;
-	Node root;
+	Tree t;
+	static int a,b;
+	static boolean af,bf;
 
-	Lca(int a,int b,Tree t)
+	Lca(Tree t)
 	{
+		this.t=t;
+		af=false;
+		bf=false;
+	}
+
+	Lca(Tree t,int a,int b)
+	{
+		this.t=t;
 		this.a=a;
 		this.b=b;
-		this.root=t;
-	}
-	Lca(int key,Tree t,int mode)
-	{
-		this.key=key;
-		this.bit=mode;
-		this.root=t;
+		af=false;
+		bf=false;
 	}
 
 	public void parse()
 	{
-		Node t=root;
-		while(true)
+		Lca l,r;
+		Tree left,right;
+		Node temp=t.root;
+		while(temp !=null)
 		{
-			af=false;
-			bf=false;
-			if(t!=null)
+			left=new Tree(temp.left);
+			right=new Tree(temp.right);
+			l=new Lca(left);
+			r=new Lca(right);
+			l.start();
+			r.start();
+			try
 			{
-				Lca left=new Lca(a,t.left,0);
-				Lca right=new Lca(b,t.right,1);
-				left.start();
-				right.start();
-				try{
-					Thread.join(left);
-					}catch(InterruptedException e){}
-				try{
-					Thread.join(left);
-					}catch(InterruptedException e){}
-				if(af && bf)
-				{
-					System.out.println("LCA is "+t.data);
-					System.exit(0);
-				}
-				else if(af)
-					t=t.left;
-				else
-					t=t.right;
+				l.join();
+				r.join();
+			}catch(InterruptedException e){}
+			if(af && bf)
+			{
+				System.out.println("LCA is "+temp.data);
+				System.exit(0);
 			}
+			else if(af)
+				temp=temp.left;
+			else
+				temp=temp.right;
 		}
+		
 	}
+
 	public void run()
 	{
-		if(root.search(root,key))
-		{
-			if(bit==0)
-				af=true;
-			else
-				bf=true;
-		}
+		if(t.search(a))
+			af=true;
+		else if(t.search(b))
+			bf=true;
 	}
 }
 class Tree
 {
 	Node root=null;
-	public boolean search(Node t,int key)
+	public boolean search(int key)
 	{
-		if(t!=null)
+		Node t=root;
+		while(t!=null)
 		{
 			if(key==t.data)
 				return true;
 			else if(key<t.data)
-				return search(t.left,key);
+				t=t.left;
 			else
-				return search(t.right,key);
+				t=t.right;
 		}
 		return false;
 	}
-	void insert()
+	void insert(int item)
 	{
-		Read r=new Read();
-		System.out.print("\nEnter the item ");
-		int item=r.readInt();
 		Node n=new Node(item);
 		Node t=root;
 		if(root==null)
@@ -143,6 +161,10 @@ class Tree
 					break;
 				}
 		return;
+	}
+	Tree(Node root)
+	{
+		this.root=root;
 	}
 }
 class Read
