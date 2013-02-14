@@ -4,12 +4,8 @@
 int a;
 main()
 {
-    for(a=0;a<5;a++)
-    {
-        if(fork()==0)
-        {
-            printf("%d\n",a);
-            _exit(0);
-        }
-    }
+    char c[]={"hello"};
+    char *d=c;
+    c=c+1;
+    puts(c);
 }
