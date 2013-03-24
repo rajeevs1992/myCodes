@@ -47,3 +47,10 @@ int main()
         pthread_join(phil[i],NULL);
     return 0;
 }
+Output:
+3 is thinking 
+4 is eating
+1 is thinking 
+5 is thinking 
+2 is eating
+3 is thinking 
