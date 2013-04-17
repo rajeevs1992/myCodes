@@ -72,3 +72,48 @@ int main()
         printf("\nThe system is in safe state \n");
     return 0;
 }
+
+Enter the number of processes 5
+
+Enter the number of resources 3
+Enter the number of units of resourse 1 10
+Enter the number of units of resourse 2 5
+Enter the number of units of resourse 3 7
+Enter maximum claim by process 1 on resource 1 7
+Enter number of resource 1 alloted to process 1 0
+Enter maximum claim by process 1 on resource 2 5
+Enter number of resource 2 alloted to process 1 1
+Enter maximum claim by process 1 on resource 3 3
+Enter number of resource 3 alloted to process 1 0
+Enter maximum claim by process 2 on resource 1 3
+Enter number of resource 1 alloted to process 2 2
+Enter maximum claim by process 2 on resource 2 2
+Enter number of resource 2 alloted to process 2 0
+Enter maximum claim by process 2 on resource 3 2
+Enter number of resource 3 alloted to process 2 0
+Enter maximum claim by process 3 on resource 1 9
+Enter number of resource 1 alloted to process 3 3
+Enter maximum claim by process 3 on resource 2 0
+Enter number of resource 2 alloted to process 3 0
+Enter maximum claim by process 3 on resource 3 2
+Enter number of resource 3 alloted to process 3 2
+Enter maximum claim by process 4 on resource 1 2
+Enter number of resource 1 alloted to process 4 2
+Enter maximum claim by process 4 on resource 2 2
+Enter number of resource 2 alloted to process 4 1
+Enter maximum claim by process 4 on resource 3 2
+Enter number of resource 3 alloted to process 4 1
+Enter maximum claim by process 5 on resource 1 4
+Enter number of resource 1 alloted to process 5 0
+Enter maximum claim by process 5 on resource 2 3
+Enter number of resource 2 alloted to process 5 0
+Enter maximum claim by process 5 on resource 3 3 
+Enter number of resource 3 alloted to process 5 2
+
+ Completed 1 
+ Completed 3 
+ Completed 4 
+ Completed 0 
+ Completed 2 
+ The system is in safe state 
+

@@ -44,4 +44,16 @@ int main(){
     pthread_join(t[2],NULL);
     return 0;
 }
+Output
+3 is reading
+1 is reading
+	2 is writing
+1 is reading
+3 is reading
+	2 is writing
+1 is reading
+3 is reading
+	2 is writing
+1 is reading
+3 is reading
 
