@@ -22,6 +22,11 @@ void permut(char *a,int i,int n)
 int main()
 {
 	char a[20];
-	gets(a);
-	permut(a,0,strlen(a)-1);
+    int n,i;
+    scanf("%d",&n);
+    for(i=0;i<n;i++)
+    {
+        scanf("%s",a);
+	    permut(a,0,strlen(a)-1);
+    }
 }

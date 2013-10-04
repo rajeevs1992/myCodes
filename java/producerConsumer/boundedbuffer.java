@@ -81,10 +81,10 @@ class Main
 	public static void main(String argv[])
 	{
 		BoundedBuffer[] B=new BoundedBuffer[4];
-		B[0]=new BoundedBuffer(0,1,100);
-		B[1]=new BoundedBuffer(1,2,2100);
-		B[2]=new BoundedBuffer(1,3,1050);
-		B[3]=new BoundedBuffer(1,4,500);
+		B[0]=new BoundedBuffer(0,1,1000);
+		B[1]=new BoundedBuffer(1,2,1000);
+		B[2]=new BoundedBuffer(1,3,1000);
+		B[3]=new BoundedBuffer(1,4,1000);
 		int i=0;
 		while(i<4)
 			B[i++].start();

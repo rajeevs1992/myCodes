@@ -1,0 +1,12 @@
+#include<stdio.h>
+int w()
+{
+    int abc;
+}
+int main()
+{
+    int a;
+    int b;
+    float a;
+    char c;
+}

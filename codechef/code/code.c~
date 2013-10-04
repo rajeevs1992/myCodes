@@ -1,0 +1,21 @@
+#include<stdio.h>
+void F(int n,int k,int ans,int opr,int array[])
+{
+}
+int main()
+{
+    int t,n,k,ans,i,j,array[1000];
+    char opr[4];
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d",&n);
+        scanf("%d",&k);
+        scanf("%d",&ans);
+        scanf("%s",&opr);
+        for(i=0;i<n;i++)
+            scanf("%d",&array[i]);
+        F(n,k,ans,opr,array);
+            
+    }
+}
