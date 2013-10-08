@@ -14,7 +14,6 @@
     }
     char * chop(char *s)
     {
-        
         int i;
         for(i=0;s[i]!=' ';i++);
         s[i]=0;
@@ -26,7 +25,8 @@
 %%
 E:P S '{' S '}' E|;
 P:PRE|;
-S:KEYWORD VAR {fprintf(fp,"<tr><td>%s</td><td>%s</td><td>%d</td></tr>",chop($1),$2,calcsize($1));} COL S 
+S:KEYWORD VAR {fprintf(fp,"<tr><td>%s</td><td>%s</td><td>%d</td></tr>",chop($1),$2,calcsize($1));
+               printf("%s---%s---%d",$1,$2,calcsize($1));} COL S 
     |
     ;
 COL:';'|;
@@ -35,7 +35,8 @@ COL:';'|;
 int main()
 {
     fp=fopen("symtab.html","w");
-    fprintf(fp,"<html><table border=1><tr><th>Symbol</th><th>Type</th><th>Size</th></tr>");
+    fprintf(fp,"<html><table border=1><tr><th>Type</th><th>Symbol</th><th>Size</th></tr>");
+    printf("Type---Symbol---Size");
     int a=yyparse();
     fclose(fp);
     return a;

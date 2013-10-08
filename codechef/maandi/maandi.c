@@ -21,28 +21,17 @@ int main()
     {
         c=0;
         scanf("%llu",&n);
-        if(n & 1)
-        {
-            for(i=3;i<=n;i+=2)
-            {
-                if(n%i==0)
-                {
-                    if(check(i))
-                        c++;
-                }
-            }
-        }
-        else
-        {
             for(i=2;i<=n;i++)
             {
                 if(n%i==0)
                 {
+                    printf("%d ",i);
                     if(check(i))
+                    {
                         c++;
+                    }
                 }
             }
-        }
         printf("%d\n",c);
     }
     

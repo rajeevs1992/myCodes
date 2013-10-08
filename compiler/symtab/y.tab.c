@@ -83,7 +83,6 @@
     }
     char * chop(char *s)
     {
-        
         int i;
         for(i=0;s[i]!=' ';i++);
         s[i]=0;
@@ -92,7 +91,7 @@
 
 
 /* Line 268 of yacc.c  */
-#line 96 "y.tab.c"
+#line 95 "y.tab.c"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -146,7 +145,7 @@ typedef int YYSTYPE;
 
 
 /* Line 343 of yacc.c  */
-#line 150 "y.tab.c"
+#line 149 "y.tab.c"
 
 #ifdef short
 # undef short
@@ -435,7 +434,7 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    27,    27,    27,    28,    28,    29,    29,    30,    32,
+       0,    26,    26,    26,    27,    27,    28,    28,    30,    32,
       32
 };
 #endif
@@ -1367,8 +1366,9 @@ yyreduce:
         case 6:
 
 /* Line 1806 of yacc.c  */
-#line 29 "sym.y"
-    {fprintf(fp,"<tr><td>%s</td><td>%s</td><td>%d</td></tr>",chop((yyvsp[(1) - (2)])),(yyvsp[(2) - (2)]),calcsize((yyvsp[(1) - (2)])));}
+#line 28 "sym.y"
+    {fprintf(fp,"<tr><td>%s</td><td>%s</td><td>%d</td></tr>",chop((yyvsp[(1) - (2)])),(yyvsp[(2) - (2)]),calcsize((yyvsp[(1) - (2)])));
+               printf("%s---%s---%d",(yyvsp[(1) - (2)]),(yyvsp[(2) - (2)]),calcsize((yyvsp[(1) - (2)])));}
     break;
 
 
@@ -1611,7 +1611,8 @@ yyreturn:
 int main()
 {
     fp=fopen("symtab.html","w");
-    fprintf(fp,"<html><table border=1><tr><th>Symbol</th><th>Type</th><th>Size</th></tr>");
+    fprintf(fp,"<html><table border=1><tr><th>Type</th><th>Symbol</th><th>Size</th></tr>");
+    printf("Type---Symbol---Size");
     int a=yyparse();
     fclose(fp);
     return a;
