@@ -56,12 +56,13 @@ void reverse(struct node * first)
 	p2=p1->next;
 	p3=p2->next;
 	p1->next=NULL;
+    p2->next=p1;
 	while(p3!=NULL)
 	{
-		p2->next=p1;
 		p1=p2;
 		p2=p1->next;
 		p3=p2->next;
+        p2->next=p1;
 	}
 	display(p2);
 }

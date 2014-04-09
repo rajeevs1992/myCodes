@@ -18,7 +18,7 @@ void permute(char *a, int i, int n)
     {   
         for(k=0;k<p;k++)
 	{
-		if(strcmp(s[k],a)==0)//avoid repeatation
+		if(strcmp(s[k],a)==0)//avo
 		goto l;
 	}
 	strcpy(s[p],a);

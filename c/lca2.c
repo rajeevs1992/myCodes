@@ -1,4 +1,3 @@
-#include<pthread.h>
 #include<malloc.h>
 #include<stdio.h>
 struct node
@@ -10,22 +9,18 @@ struct node
 struct node *root=NULL;
 struct node * insert(int in,struct node *root);
 void display(struct node *);
-void *start();
 int in,n1,n2;
 void LCA();
 int main()
 {
-    int t;
-    while(1)
+    int t,n;
+    scanf("%d",&n);
+    while(n--)
     {
-        printf("\nEnter the node ");
         scanf("%d",&in);
-        if(in == 0)
-            break;
         root=insert(in,root);
     }
     display(root);
-    printf("\nFind LCA of ");
     scanf("%d",&n1);
     scanf("%d",&n2);
     if(n1>n2)
@@ -35,6 +30,7 @@ int main()
         n1=t;
     }
     LCA();
+    return 0;
 
 }
 void display(struct node *root)
@@ -42,7 +38,6 @@ void display(struct node *root)
     if(root!=NULL)
     {
         display(root->left);
-        printf("%d\t",root->data);
         display(root->right);
     }
 }
@@ -63,19 +58,13 @@ struct node * insert(int in,struct node *root)
 }
 void LCA()
 {
-    pthread_t t;
-    pthread_create(&t,NULL,start,NULL);
-    pthread_join(t,NULL);
-}
-void *start()
-{
     struct node *temp=root;
     while(1)
     {
         if(n1<temp->data<n2)
         {
-            printf("\nLCA is %d ",temp->data);
-            exit(0);
+            printf("%d\n",temp->data);
+            break;
         }
         else if(n1<n2<temp->data)
             temp=temp->left;

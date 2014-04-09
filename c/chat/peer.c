@@ -47,10 +47,3 @@ int main()
         }
     }
 }
-
-Output:
-
-Alice's System:           Bob's System
----------------           ------------
-Alice:Hi                   Alice:Hi
-Bob:Hello                  Bob:Hello

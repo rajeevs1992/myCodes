@@ -110,14 +110,3 @@ void LCA(int n1,int n2,struct node *root)
     }
 }
 
-Output:
-
-Enter the node 500
-Enter the node 250
-Enter the node 125
-Enter the node 750
-Enter the node 625
-Enter the node 0
-125 250 500 625 750 
-Find LCA of 125 625
-The LCA is 500

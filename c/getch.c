@@ -1,8 +1,12 @@
 #include<stdio.h>
 int main()
 {
+    int ch;
 	system("stty raw");
-	printf("%c",getchar());
+    ch = getchar();
 	system("stty cooked");
-	return 0;
+    if(ch == 127)
+        return -1;
+    else
+        printf("%c",ch);
 }

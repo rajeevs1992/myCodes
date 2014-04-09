@@ -9,10 +9,6 @@ int has_7(char* c)
             return 1;
     return 0;
 }
-int div(char *c)
-{
-       
-}
 void addone(char str[])
 {
     int l=strlen(str),k,j,carry=1;
@@ -46,7 +42,7 @@ void addone(char str[])
 }            
 int main()
 {
-    int n,i=0,adder=1;
+    int n,i=0,adder=1,j=0;
     char c[102]="1",p[102];
     scanf("%d",&n);
     while(n--)
@@ -70,6 +66,7 @@ int main()
         }
        printf("%d\t",i);
        addone(c);
+       j=(j+1)%7;
     }
     }
 }

@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<math.h>
 typedef unsigned long long int uli;
 int check(uli f)
 {
@@ -14,19 +15,24 @@ int check(uli f)
 }
 int main()
 {
-    int t,c,init,i;
+    int t,c,limit,i;
     uli n;
     scanf("%d",&t);
     while(t--)
     {
+        char array[1000000]={0};
         c=0;
         scanf("%llu",&n);
-            for(i=2;i<=n;i++)
+        limit=sqrt(n);
+            for(i=1;i<=limit;i++)
             {
                 if(n%i==0)
                 {
-                    printf("%d ",i);
                     if(check(i))
+                    {
+                        c++;
+                    }
+                  if(check(n/i))
                     {
                         c++;
                     }
