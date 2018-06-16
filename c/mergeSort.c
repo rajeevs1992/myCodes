@@ -1,36 +1,56 @@
 #include<stdio.h>
-void mergesort(int a[],int low,int high)
+
+
+void merge(int *arr, int low, int mid, int high)
 {
-	int mid=(low+high)/2;
-	if(high-low!=0)
-	{
-		mergesort(a,low,mid);
-		mergesort(a,mid+1,high);
-		merge(a,low,mid,high);
-	}
+    int subarray[100], i=low, j=mid+1, k=0;
+    while(i <= mid && j <= high)
+    {
+        if(arr[i] < arr[j])
+        {
+            subarray[k++] = arr[i++];
+        }
+        else
+        {
+            subarray[k++] = arr[j++];
+        }
+    }
+    while(i<=mid)
+    {
+        subarray[k++] = arr[i++];
+    }
+    while(j<=high)
+    {
+        subarray[k++] = arr[j++];
+    }
+    for(i=0;i<k;i++)
+    {
+        arr[low + i] = subarray[i];
+    }
 }
-void merge(int a[],int low,int mid,int high)
+void mergesort(int *arr, int low, int high)
 {
-	int i=low,j=mid+1,k=0,array[10];
-	while(i<=mid && j<=high)
-		array[k++]=(a[i]<=a[j])?a[i++]:a[j++];
-	while(i<=mid)
-		array[k++]=a[i++];
-	while(j<=high)
-		array[k++]=a[j++];
-	i=low;
-	j=0;
-	while(i<=high)
-		a[i++]=array[j++];
+    if(low!=high)
+    {
+        int mid = (low + high) /2;
+        mergesort(arr, low, mid);
+        mergesort(arr, mid + 1, high);
+        merge(arr, low, mid, high);
+    }
 }
 
-main()
+int main()
 {
-	int a[20],n,i;
-	for(i=0;i<5;i++)
-		scanf("%d",&a[i]);
-	mergesort(a,0,4);
-	for(i=0;i<5;i++)
-		printf("%d\t",a[i]);
-}
+    int arr[100], n, i;
+    scanf("%d", &n);
+    for(i=0;i<n;i++)
+    {
+        scanf("%d", arr+i);
+    }
+    mergesort(arr, 0, n-1);
+    for(i=0;i<n;i++)
+    {
+        printf("%d\n", *(arr+i));
+    }
 
+}
